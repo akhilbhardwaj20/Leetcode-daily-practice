@@ -1,4 +1,4 @@
-// problem link ---->   
+// problem link ---->  https://leetcode.com/problems/find-the-duplicate-number/ 
 // tc - O(n^2) , sc - O(1) 
 class Solution {
     public int findDuplicate(int[] nums) {
