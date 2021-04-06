@@ -27,25 +27,34 @@ class Solution{
 
 class Solution{
     static int minJumps(int[] arr){
-        int prev = 0, curr = 0;
-        int jumps = 0;
+        int max_reach = arr[0], steps_left = arr[0];
+        int jumps = 1;
     
+        if(arr.length <= 1) {
+            return 0;
+        }
         if(arr[0] == 0) {
                 return -1;
             }
         
-        for(int i = 0; i < arr.length; i++) {
+       
+        for(int i = 1; i < arr.length; i++) {
             if(i == arr.length - 1) {
             return jumps;
         }
-         
-            if(i > prev) {
+        
+            max_reach = Math.max(max_reach, i + arr[i]);
+            steps_left -= 1;
+            if(steps_left == 0) {
                 jumps += 1;
-                prev = curr;
+                
+                if(i - max_reach >= 0) {
+                return -1;
             }
-            curr = Math.max(curr, i + arr[i]);
+              steps_left = max_reach - i;
+          }
+            
         }
-        return jumps;
+        return -1;
     }
 }
-
