@@ -3,6 +3,7 @@
 // Second approach - Use HashMap 
 // TC - O(n)  SC- O(n)
 // Constant extra space soln - Using Moore algorithm
+// edit test case : [-1,-1,2,-2,-1,3,-2,-2,-1,3,-2,-1] n = 12 , k =3 
 class Solution {
     public List<Integer> majorityElement(int[] nums) {
         int n = nums.length;
