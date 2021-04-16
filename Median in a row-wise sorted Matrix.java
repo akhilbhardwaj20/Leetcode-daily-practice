@@ -1,6 +1,6 @@
 // Problem link -------->     https://practice.geeksforgeeks.org/problems/median-in-a-row-wise-sorted-matrix1527/1#
-// TC - O(n2)
-// SC - O(1)
+// TC - O(n*m)
+// SC - O(n)
 class Solution {
     int median(int matrix[][], int r, int c) {
         List<Integer> list = new ArrayList<>();
