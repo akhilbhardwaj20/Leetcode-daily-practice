@@ -1,0 +1,44 @@
+class Solution {
+    // TC - O(n)
+    // SC -O(height) since recursion stack is involved
+    public TreeNode sufficientSubset(TreeNode root, int limit) {
+        if(root == null) {
+            return root;
+            
+        }
+       boolean finalRes = dfsRecurse(root, limit, 0);
+        if(finalRes) {
+            return null;       // if all paths return sum < limit return null
+        }
+        return root;             // otherwise return root
+    }
+    
+    private boolean dfsRecurse(TreeNode root, int limit, int sumSoFar) {
+        
+        if(root == null) {
+            return true;
+        }
+        // if we are at leaf node and the sum upto that node is less than the limit 
+        if(sumSoFar+root.val < limit && root.left == null && root.right == null) {
+            return true;
+        }
+        // if we are at leaf node and the sum upto that node is greater or equal than the limit
+        if(sumSoFar+root.val >= limit && root.left == null && root.right == null) {
+            return false; 
+        }
+        boolean left = false;
+        boolean right = false;
+        
+        // recursively do for left and right subtrees and check 
+        left = dfsRecurse(root.left, limit, sumSoFar+root.val);
+        right = dfsRecurse(root.right, limit, sumSoFar+root.val);
+        
+        if(left) { // if the left part sum less than the limit make left part null
+            root.left = null;
+        }
+        if(right) { // if the right part sum less than the limit make left part null
+            root.right = null;
+        }
+        return left && right;
+    }
+}
