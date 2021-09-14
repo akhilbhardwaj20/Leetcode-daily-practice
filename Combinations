@@ -1,0 +1,32 @@
+class Solution {
+    
+    // TC - O(k * n^k) -> not tight bound and tight bound -> O(k*nCk)
+    // sc - O(n) recursion stack 
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> ans = new LinkedList<>();
+        if(k==0) {
+            // return empty list as the ans
+            ans.add(new LinkedList());
+            return ans;
+        }
+        backtrack(1,new LinkedList<Integer>(),n,k,ans);
+        return ans;
+        
+    }
+    
+    private void backtrack(int start, LinkedList<Integer> current, int n, int k, List<List<Integer>> ans) {
+        
+        if(current.size() == k) {
+            // if the size of the current list is equal to k ,create a deep copy so that values remain at               // same place 
+            ans.add(new LinkedList(current));
+        }
+        
+        for(int i = start; i <= n; i++) {
+            if(current.size() < k) {
+                current.add(i);
+                backtrack(i+1,current,n,k,ans);
+                current.remove(current.size()-1);  // backtracking part, remove the last to continue for                                                      //the next iteration
+            }
+        }
+    }
+}
