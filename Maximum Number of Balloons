@@ -1,0 +1,25 @@
+class Solution {
+// TC - O(n)
+// SC - O(n)
+    public int maxNumberOfBalloons(String text) {
+        HashMap<Character,Integer> map = new HashMap<>();
+    for(char ch:text.toCharArray()){
+        if (ch == 'b' || ch == 'a' || ch == 'l' || ch == 'o' || ch == 'n')
+            map.put(ch,map.getOrDefault(ch,0)+1);
+    }
+    
+    if(!map.containsKey('b') || !map.containsKey('a') || !map.containsKey('l') || !map.containsKey('o') || !map.containsKey('n'))
+        return 0;
+    
+    int count = 0;
+    while(map.get('b')>=1 && map.get('a')>=1 && map.get('l')>=2 && map.get('o')>=2 && map.get('n')>=1){
+        count++;
+        map.put('b',map.get('b')-1);
+        map.put('a',map.get('a')-1);
+        map.put('l',map.get('l')-2);
+        map.put('o',map.get('o')-2);
+        map.put('n',map.get('n')-1);
+    }
+    return count;
+    }
+}
