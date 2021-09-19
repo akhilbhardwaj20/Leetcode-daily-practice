@@ -1,0 +1,30 @@
+class Solution {
+    private List<String> ans = new ArrayList<>();
+    public List<String> addOperators(String num, int target) {
+        dfs(0,"",0,0,num,target);
+        return ans;
+    }
+    public void dfs(int i, String path, long resSoFar, long prevNo, String s, int target) {
+        
+        if(i == s.length()) {
+            if(resSoFar == target) {
+                ans.add(path);
+            }
+            return;
+        }
+        
+        for(int j = i; j < s.length(); j++) {
+            // case 1 : if at any place i came across a 0 then we can skip this computation and carry on 
+            if(j > i && s.charAt(i) == '0') break;
+            long currNo = Long.parseLong(s.substring(i, j+1));
+            // base case when i=0 or the start operation, so pick up the first no without using any operator
+            if(i == 0) {
+                dfs(j+1, path+currNo, currNo, currNo, s, target);
+            } else {
+                dfs(j+1, path+ "+" + currNo, resSoFar + currNo, currNo, s, target);
+                dfs(j+1, path+ "-" + currNo, resSoFar - currNo, -currNo, s, target);
+                dfs(j+1, path+ "*" + currNo, resSoFar - prevNo + prevNo * currNo, prevNo * currNo, s, target);
+            }
+        }
+    }
+}
