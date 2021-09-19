@@ -1,0 +1,26 @@
+class Solution {
+    public int numDistinct(String s, String t) {
+        
+        int [][]dp = new int[t.length()+1][s.length()+1]; // 1 extra so that we can add empty string // eg-> s="" & t=""        
+        
+        // filling the first row with all 1's
+        for(int j=0; j<= s.length(); j++) {
+            dp[0][j] = 1;
+        }
+        // for(int i=0; i<n; i++) {
+        //     dp[i][0] = 0;
+        // }
+        
+        for(int i=0; i<t.length(); i++) {
+            for(int j=0; j<s.length(); j++) {
+                if(t.charAt(i) == s.charAt(j)) {  // case 1 ; if the last character is not same
+                    dp[i+1][j+1] = dp[i+1][j] + dp[i][j];
+                } else {
+                    // if the last char is same
+                    dp[i+1][j+1] = dp[i+1][j];
+                }
+            }
+        }
+        return dp[t.length()][s.length()];
+    }
+}
