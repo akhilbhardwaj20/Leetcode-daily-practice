@@ -1,0 +1,27 @@
+public class Solution {
+    /**
+     * @param nums: a list of integer
+     * @return: return a integer, denote  the maximum number of consecutive 1s
+     */
+    public int findMaxConsecutiveOnes(int[] nums) {
+        // write your code here
+                 return helper(nums, 1);
+    }
+
+    private int helper(int []nums, int k) {
+        int i = 0, res = 0;
+        for(int j=0; j < nums.length; j++) {
+            if(nums[j] == 0) {
+                k--;
+            }
+            while(k<0) {
+                if(nums[i] == 0) {
+                    k++;
+                }
+                i++;
+            }
+             res = Math.max(res, j-i + 1);
+        }
+        return res;
+    }
+}
