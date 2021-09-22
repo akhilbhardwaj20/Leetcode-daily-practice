@@ -1,0 +1,32 @@
+class Solution {
+
+ /*
+    Dutch Flag Algorithm states that if low, mid and high are 3 positions in an array having 0,1 and 2
+    then low, mid and high would be positions such that
+    nums[0.... low-1] would have all 0s
+    nums[low.... mid-1] would have all 1s
+    nums[mid.... n-1] would have all 2s
+    TC- O(n)
+    // SC - O(1)
+    Considering above 3 points, write below code
+    */
+    public void sortColors(int[] nums) {
+        int lo = 0, mid = 0, hi = nums.length-1;
+        
+        while(lo <= mid && mid <= hi) {
+            if(nums[mid] == 0) {
+                int temp = nums[mid];
+                nums[mid] = nums[lo];
+                nums[lo] = temp;
+                lo++; mid++;
+            } else if(nums[mid] == 1) {
+                mid++;
+            } else {
+                int temp = nums[mid];
+                nums[mid] = nums[hi];
+                nums[hi] = temp;
+                hi--;
+            }
+        }
+    }
+}
