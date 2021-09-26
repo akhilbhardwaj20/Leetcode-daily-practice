@@ -1,0 +1,34 @@
+class Solution {
+    public int[][] generateMatrix(int n) {
+        
+        int [][] matrix = new int[n][n];
+        
+        int rowstart = 0,rowend = n-1,colstart = 0,colend = n-1;
+        int count = 0;
+        // fill top row
+        
+        while(rowstart <= rowend && colstart <= colend) {
+            for(int j = colstart; j <= colend; j++) {
+            matrix[rowstart][j] = ++count;
+        }
+            rowstart++;
+        // fill rightmost col
+          for(int j = rowstart; j <= rowend; j++) {
+            matrix[j][colend] = ++count;
+        }
+             colend--;
+        // fill bottommost row
+          for(int j = colend; j >= colstart; j--) {
+            matrix[rowend][j] = ++count;
+        }
+            rowend--;
+        // fill leftmost col
+         for(int j = rowend; j >= rowstart; j--) {
+            matrix[j][colstart] = ++count;
+        }
+            colstart++;        
+        }
+    
+        return matrix;
+    }
+}
