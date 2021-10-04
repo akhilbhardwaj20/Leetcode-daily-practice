@@ -1,0 +1,34 @@
+// solution 1: O(m+n) 
+
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        
+        // TC - O(m+n)
+        // SC - O(1)
+        if(matrix.length == 0) {
+            return false;
+        }
+        
+      
+        // start from first row and last col
+        int row = 0 , col = matrix[0].length - 1;
+        
+        while(row >= 0 && row <= matrix.length -1 && col >= 0 && col <= matrix[0].length- 1) {
+            if(matrix[row][col] == target) {
+                return true;
+            }else if (matrix[row][col] < target) {
+                row++;
+            } else {
+                col--;
+            }
+        }
+            return false;
+    }
+    
+    
+}
+
+// solution 2 (Efficient), TC- O(log(mn)) using binary search
+
+
+
