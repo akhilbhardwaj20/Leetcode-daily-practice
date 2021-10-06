@@ -1,0 +1,21 @@
+class Solution {
+
+// TC - O(n)
+// using the hint that the number lies in the range [1,n] and array indexing is 0 based.
+// SC - O(1)
+    public List<Integer> findDuplicates(int[] nums) {
+        List<Integer> res = new ArrayList<>();
+        
+        for(int i = 0; i < nums.length; i++) {
+            
+            int indexToBeNegated = Math.abs(nums[i])-1; // -1 to count the fact that array is 0- based
+           
+            // negate the element present at that idx
+            if(nums[indexToBeNegated] < 0) {
+                res.add(Math.abs(nums[i]));  // since our range is 1- based
+            }
+             nums[indexToBeNegated] *= -1;
+        }
+        return res;
+    }
+}
