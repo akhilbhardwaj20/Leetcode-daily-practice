@@ -1,0 +1,46 @@
+class Solution {
+    // tc - O(m*n)
+    public boolean exist(char[][] board, String word) {
+        
+        int m = board.length;
+        int n = board[0].length;
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                if(board[i][j] == word.charAt(0) && helperDFS(board,word,0,i,j)) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+        
+    }
+    
+    public boolean helperDFS(char[][] board, String word, int start, int r, int c) {
+        
+        // if we are past the word.length we are gonna return true
+        if(start >= word.length()) {
+            return true;
+        }
+        
+        
+        
+        // check for out of bounds
+        if(r<0 || c<0 || r>=board.length || c >= board[0].length || board[r][c] == '0' || board[r][c] !=               word.charAt(start)) {
+            return false;
+        }
+        
+        // set the boards position to seen
+        char temp = board[r][c];
+        board[r][c] = '0';
+        //recursively search for the next word in the matrix going in all 4 directions
+       if(helperDFS(board,word,start+1,r,c-1) ||  //left
+        helperDFS(board,word,start+1,r,c+1) || // right
+        helperDFS(board,word,start+1,r-1,c) ||   // up
+        helperDFS(board,word,start+1,r+1,c) )// down
+        return true;
+        // set back to unseen for the next iteration
+        board[r][c] = temp;
+        return false;
+    }
+}
